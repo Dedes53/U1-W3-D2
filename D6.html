@@ -63,7 +63,7 @@
 
     <div>
       <p>Anche questo testo è per gli esercizi</p>
-      <h2 id="changeMyColor" style="color: #ff00d6">Apri questa pagina con VSCode per scoprire gli esercizi</h2>
+      <h2 id="changeMyColor" style="color: #ff00d6">Cliccami</h2>
     </div>
 
     <div id="tableArea"></div>
@@ -156,8 +156,12 @@
       /* ESERCIZIO 8
          Scrivi una funzione che renda verde il background di ogni lista non ordinata
         */
+      const paintItGreen = function () {
+        const allUl = document.querySelectorAll("ul");
+        allUl.forEach((ul) => (ul.style.backgroundColor = "green"));
+      };
 
-      const paintItGreen = function () {};
+      paintItGreen();
 
       /* ESERCIZIO 9
          Scrivi una funzione che rimuova l'ultima lettera dall'h1 ogni volta che l'utente lo clicca
@@ -175,26 +179,98 @@
          Crea una funzione che crei una tabella nell'elemento con id "tableArea".
          La tabella avrà 5 elementi e questa struttura: immagine, nome prodotto, quantità, prezzo
       */
+      const newTable = document.createElement("table");
 
-      const generateTable = function () {};
+      const generateTable = function (nRow) {
+        const tableArea = document.getElementById("tableArea");
+
+        tableArea.appendChild(newTable);
+
+        for (let i = 0; i < nRow; i++) {
+          const row = document.createElement("tr");
+          newTable.appendChild(row);
+
+          const data = ["immagine", "nome prodotto", "quantità", "prezzo"];
+
+          data.forEach((e) => {
+            const td = document.createElement("td");
+
+            if (e === "immagine") {
+              const img = document.createElement("img");
+
+              img.src = "gatto.jpg";
+              img.alt = "prodotto";
+              img.style.width = "50px";
+              td.appendChild(img);
+            } else {
+              td.innerText = e;
+            }
+
+            row.appendChild(td);
+          });
+        }
+
+        return newTable;
+      };
+
+      generateTable(5);
 
       /* ESERCIZIO 12
          Crea una funzione che aggiunga una riga alla tabella precedentemente creata e fornisca i dati necessari come parametri
       */
 
-      const addRow = function () {};
+      const addRow = function (table, numberToAdd) {
+        for (let i = 0; i < numberToAdd; i++) {
+          const row = document.createElement("tr");
+          table.appendChild(row);
+
+          const data = ["immagine", "nome prodotto", "quantità", "prezzo"];
+
+          data.forEach((e) => {
+            const td = document.createElement("td");
+
+            if (e === "immagine") {
+              const img = document.createElement("img");
+
+              img.src = "gatto.jpg";
+              img.alt = "prodotto";
+              img.style.width = "50px";
+              td.appendChild(img);
+            } else {
+              td.innerText = e;
+            }
+
+            row.appendChild(td);
+          });
+        }
+      };
+
+      addRow(newTable, 1);
 
       /* ESERCIZIO 14
         Crea una funzione che nasconda le immagini della tabella quando eseguita
       */
+      const hideAllImages = function (table) {
+        const imgs = table.querySelectorAll("img");
+        imgs.forEach((e) => (e.style.display = "none"));
+      };
 
-      const hideAllImages = function () {};
+      hideAllImages(newTable);
 
       /* EXTRA ESERCIZIO 15
         Crea una funzione che cambi il colore del h2 con id "changeMyColor" con un colore random ad ogni click ricevuto
       */
 
-      const changeColorWithRandom = function () {};
+      const changeColorWithRandom = function () {
+        const h2 = document.getElementById("changeMyColor");
+
+        h2.addEventListener("click", function () {
+          const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+          h2.style.color = randomColor;
+        });
+      };
+
+      changeColorWithRandom();
     </script>
   </body>
 </html>
